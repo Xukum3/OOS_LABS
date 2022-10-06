@@ -1,0 +1,41 @@
+  243  ls
+  244  history
+  245  cd ~
+  246  mkdir test
+  247  cd test
+  248  touch file
+  249  ls -l
+  250  chmod 000 file
+  251  echo "тест" >> file
+  252  cat file
+  253  chmod u+w file
+  254  ll
+  255  echo "тест" >> file
+  256  cat file 
+  257  chmod g+r file
+  258  ll
+  259  cat file
+  260  chmod u+r file
+  261  ll
+  262  cat file
+  263  mkdir dir
+  264  cd dir
+  265  touch new_file
+  266  echo "file 2" >> new_file 
+  267  cat new_file 
+  268  cd ../
+  269  chmod 666 dir
+  270  cd dir
+  271  cat dir/new_file 
+  272  rm dir/new_file 
+  273  chown root file
+  274  chgrp root file
+  275  umask 077
+  276  touch file1
+  277  ll file1
+  278  umask 000
+  279  touch file2
+  280  ll file2
+  281  cat file
+  282  ls -lr > ../ls_res.txt
+  283  history > ../lab2_res.txt

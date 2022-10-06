@@ -1,0 +1,5 @@
+total 4
+-rw-rw-rw-. 1 xukum xukum  0 Oct  6 15:51 file2
+-rw-------. 1 xukum xukum  0 Oct  6 15:50 file1
+-r--r-----. 1 root  xukum  9 Oct  6 15:41 file
+drw-rw-rw-. 2 xukum xukum 22 Oct  6 15:43 dir
