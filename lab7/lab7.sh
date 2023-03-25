@@ -9,12 +9,12 @@ printblockdevices() {
 }
 
 readinput() {
-	local -n list=$1
-	list+=("Справка" "Назад")
-	select opt in "${list[@]}"; do
+	local -n arr=$1
+	arr+=("Справка" "Назад")
+	select opt in "${arr[@]}"; do
 	case $opt in
 		Назад) return 0;;
-		Справка) echo $2;;
+		Справка) echo "Введите число, соответствующее опции из списка";;
 		*)
 			if [[ -z $opt ]]; then
 				echo "Ошибка: введите число из списка" >&2
@@ -83,27 +83,26 @@ do
 		read -p "Введите путь до файловой системы: " filesyspath
 		if [ -z $filesyspath ]; then
 			readarray -t mounts < <(printblockdevices)
-			readinput mounts "Введите число, соответствующее опции"
+			readinput mounts
 			res=$?
 			[ $res == 0 ] && continue
 			filesyspath=$(echo ${mounts[res - 1]} | cut -d " " -f3 )
 		fi
 		umount $filesyspath
-		check $? "Успешно отмонтировано" "Ошибка"
 	    ;;
 
     "Изменить параметры монтирования примонтированной файловой системы")
 	    read -p "Введите путь до файловой системы: " remountfilesyspath
 		if [ -z $remountfilesyspath ]; then
 			readarray -t mounts < <(printblockdevices)
-			readinput mounts "Введите число, соответствующее опции"
+			readinput mounts
 			res=$?
 			[ $res == 0 ] && continue
 			remountfilesyspath=$(echo ${mounts[res - 1]} | cut -d " " -f3 )
 		fi
 
 	    chooseopt=("только чтение" "чтение и запись")
-		readinput chooseopt "Введите число, соответствующее интересующей опции"
+		readinput chooseopt
 		res=$?
 		if [ $res == 1 ]; then
 	    	mount -o remount,ro $remountfilesyspath
@@ -116,7 +115,7 @@ do
 	    read -p "Введите путь до файловой системы: " filesyspath #считать с консоли или дать выбрать
 		if [ -z $filesyspath ]; then
 			readarray -t mounts < <(printblockdevices)
-			readinput mounts "Введите число, соответствующее папке, которую хотите отмонтировать"
+			readinput mounts
 			res=$?
 			[ $res == 0 ] && continue
 			filesyspath=$(echo ${mounts[res - 1]} | cut -d " " -f3 )
@@ -131,7 +130,7 @@ do
 		else 
 			echo "Есть следующие системы:"
 			readarray -t exts < <(df -t ext2 -t ext3 -t ext4 -t extcow --output=source,fstype,target | grep -v Filesystem )
-			readinput exts "Введите число, соответствующее интересующей файловой системе"
+			readinput exts
 			res=$?
 			[ $res == 0 ] && continue
 			filesyspath=$(echo ${exts[res - 1]} | cut -d " " -f1 )
