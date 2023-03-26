@@ -23,7 +23,7 @@ readinput() {
 }
 
 unitpath() {
-	tmp=$(systemctl status $1 | grep loaded)
+	tmp=$(systemctl status $1 | grep loaded | head -1)
 	local path=$(awk '{ sub(/.*\(/, ""); sub(/;.*/, ""); print }' <<< $tmp)
 	echo $path
 }
