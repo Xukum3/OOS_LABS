@@ -1,0 +1,16 @@
+  100  auditctl -D
+  101  auditctl -w /home/xukum/OOS_LABS/lab11/file1 -p war -k xukum_file1
+  102  auditctl -l
+  103  aureport --file -ts today -i --summary
+  104  aureport --file -ts recent
+  105  ausearch -a 13053
+  106  ausearch -a 255
+  107  ausearch -a 254
+  108  aureport --file -ts recent
+  109  ausearch -a 256
+  110  aureport
+  111  aureport --auth -ts recent
+  112   aureport --user -ts recent -i
+  113  ausearch --uid 1001 -ts recent
+  114  ausearch --uid 1000 -ts recent
+  115  history > lab11_roothistory
